@@ -57,7 +57,7 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang S
 .wear .tp{flex:1;text-align:center;background:#fbf8f1;border:1.5px dashed var(--line);border-radius:14px;padding:10px}
 .wear .tp img{width:54px;height:54px;object-fit:cover;border-radius:10px;background:#eee;display:block;margin:0 auto 6px}
 .wear .tp .nm{font-size:11.5px;color:var(--mut);line-height:1.3}
-.wear .txt{margin-top:12px;font-size:13px;color:var(--ink);background:#f4eee1;border-radius:12px;padding:10px;line-height:1.7;word-break:break-all}
+.wear .txt{margin-top:12px;font-size:13px;color:var(--ink);background:#f4eee1;border-radius:12px;padding:10px;line-height:1.7;word-break:break-all;white-space:pre-wrap}
 .wear .txt .empty{color:var(--mut)}
 .mylook-btn{margin:14px 12px 0;display:flex;gap:8px}
 .mylook-btn .btn{flex:1}
@@ -73,9 +73,11 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang S
 .look .me{padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
 .look .me .na{font-size:13px;font-weight:600}
 .look .me .cat{font-size:10.5px;color:var(--accent);background:#f3e9d6;padding:2px 8px;border-radius:20px}
+.look .nt{padding:0 10px 7px;font-size:11px;color:var(--mut);line-height:1.45;word-break:break-all;white-space:pre-wrap}
 .look .foot{padding:0 10px 9px;display:flex;gap:6px}
 .look .foot .min{flex:1;border:none;border-radius:16px;padding:6px;font-size:11.5px;cursor:pointer}
 .look .foot .wearit{background:var(--ink);color:#fff}
+.look .foot .editl{flex:0 0 34px;background:#f3e9d6;color:var(--accent)}
 .look .foot .oldel{background:#f6e6e3;color:var(--danger)}
 .look .catrow{display:flex;align-items:center;justify-content:center;margin:0;padding:7px 10px;border-top:1px solid var(--line);font-size:12px;color:var(--accent);cursor:pointer;background:#fbf8f1}
 .fab{position:fixed;right:16px;bottom:20px;z-index:40;width:58px;height:58px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:26px;box-shadow:0 8px 22px rgba(160,115,50,.4);cursor:pointer}
@@ -168,7 +170,7 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang S
   <div class="sec"><h2>我的搭配集</h2><span class="n" id="cntLook"></span></div>
   <div class="catbar" id="catBar"></div>
   <div class="looks" id="lookList"></div>
-  <p style="text-align:center;color:var(--mut);font-size:12.5px;margin-top:24px;padding:0 20px">没搭配？先去左页「搭配台」拼好后保存。长按卡片可归类 / 换分类</p>
+  <p style="text-align:center;color:var(--mut);font-size:12.5px;margin-top:24px;padding:0 20px">没搭配？先去左页「搭配台」拼好后保存。点卡片上的 ✎（或长按卡片）可给搭配命名、写备注、换分类</p>
 </div>
 
 <button class="fab" id="addFab">＋</button>
@@ -202,14 +204,16 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang S
   </div>
 </div>
 
-<!-- 归类搭配 -->
+<!-- 编辑搭配：命名 + 备注 + 归类 -->
 <div class="sheet" id="catSheet">
   <div class="box">
     <div class="grab"></div>
-    <h3>🏷 归类搭配</h3>
+    <h3>✏️ 编辑搭配</h3>
+    <div class="fld"><label>搭配名称</label><input id="l_name" placeholder="如：白T + 浅蓝牛 · 日常"></div>
+    <div class="fld"><label>备注</label><textarea id="l_note" rows="2" placeholder="如：适合上学逛街，配小白鞋最稳"></textarea></div>
     <div class="fld"><label>点选已有分类：</label><div class="chips" id="lookCatChips"></div></div>
     <div class="fld"><label>或新建分类</label><input id="l_newcat" placeholder="输入新分类名"></div>
-    <div class="btns"><button class="btn line" id="catCancel">取消</button><button class="btn accent" id="catOk">归到该类</button></div>
+    <div class="btns"><button class="btn line" id="catCancel">取消</button><button class="btn accent" id="catOk">保存</button></div>
   </div>
 </div>
 
@@ -252,13 +256,14 @@ body{background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang S
     <div class="grab"></div>
     <h3>💡 使用说明</h3>
     <div style="font-size:13.5px;line-height:1.85;color:#333">
-      <p><b>👗 我的搭配</b>：把你喜欢的整套存起来、长按卡片归类、按自建分类筛选、一键"今天就穿它"。</p>
+      <p><b>👗 我的搭配</b>：把你喜欢的整套存起来、命名+写备注、长按卡片归类、按自建分类筛选、一键"今天就穿它"。</p>
       <p>1️⃣ 加衣服：右下角 ＋（搭配台页直接加；我的搭配页会先弹菜单）。</p>
       <p>2️⃣ 存整套：左页搭好 → 「💾 存到我的搭配」。</p>
-      <p>3️⃣ 分类：长按搭配卡片归到某分类 / 输入新分类名即可；长按顶部分类标签可删除该分类。</p>
-      <p>4️⃣ 照片：搭配台长按衣服卡片（或点📷）可改/加照片；数据会自动自带图片。</p>
-      <p>5️⃣ 同步：导出时 ✅「下载数据(含图片)」，得到自包含的 .json，发给助手/导入都能带图。</p>
-      <p>6️⃣ 数据存浏览器 localStorage，建议定期下载一份。</p>
+      <p>3️⃣ 命名/备注：点搭配卡片上的 ✎（或长按卡片），可改名称、写备注、归到某分类。</p>
+      <p>4️⃣ 分类：长按搭配卡片归到某分类 / 输入新分类名即可；长按顶部分类标签可删除该分类。</p>
+      <p>5️⃣ 照片：搭配台长按衣服卡片（或点📷）可改/加照片；数据会自动自带图片。</p>
+      <p>6️⃣ 同步：导出时 ✅「下载数据(含图片)」，得到自包含的 .json，发给助手/导入都能带图。</p>
+      <p>7️⃣ 数据存浏览器 localStorage，建议定期下载一份。</p>
     </div>
     <div class="btns"><button class="btn line" style="flex:1" id="aboutClose">知道了</button></div>
   </div>
@@ -310,6 +315,7 @@ let curCat='全部';
 function allItems(cat){return items.filter(i=>i.cat===cat).concat(Object.values(custom).filter(c=>c.cat===cat));}
 function byId(id){return items.find(i=>i.id===id)||custom[id];}
 function nameOf(id){return byId(id)?byId(id).name:'未选';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function imgUrl(id){const it=byId(id);if(!it)return '';if(photos[id])return photos[id];return it.img?('images/'+it.img):'';}
 function photoHtml(id){const u=imgUrl(id);return u?`<img src="${u}">`:'<img style="opacity:0">';}
 function persist(){localStorage.setItem('wardrobe_v7',JSON.stringify({items,photos,custom,looks,active:curActive}));}
@@ -403,9 +409,11 @@ function renderLooks(){
         <div class="cell">${sel_photo(l.bottom)}<span class="lbl">下</span></div>
         <div class="cell">${l.outer?sel_photo(l.outer):''}<span class="lbl">${l.outer?'外':''}</span></div>
       </div>
-      <div class="me"><div class="na">${l.name}</div><div class="cat">${l.cat||'未归类'}</div></div>
+      <div class="me"><div class="na">${esc(l.name)}</div><div class="cat">${esc(l.cat||'未归类')}</div></div>
+      ${l.note?`<div class="nt">${esc(l.note)}</div>`:''}
       <div class="foot">
         <button class="min wearit" data-wear="${l.id}">${active?'✔ 就是今天':'今天就穿它'}</button>
+        <button class="min editl" data-editl="${l.id}" title="命名 / 备注">✎</button>
         <button class="min oldel" data-oldel="${l.id}">✕</button>
       </div>
     </div>`;
@@ -417,7 +425,7 @@ function renderLooks(){
     document.getElementById('wTop').innerHTML=sel_photo(a.top);
     document.getElementById('wBottom').innerHTML=sel_photo(a.bottom);
     document.getElementById('wOuter').innerHTML=a.outer?sel_photo(a.outer):'<span style="font-size:11px;color:var(--mut)">无</span>';
-    document.getElementById('wearTxt').textContent='我今天穿：'+nameOf(a.top)+' + '+nameOf(a.bottom)+(a.outer?' + '+nameOf(a.outer):'')+'（'+a.name+(a.cat?' · '+a.cat:'')+'）';
+    document.getElementById('wearTxt').textContent='我今天穿：'+nameOf(a.top)+' + '+nameOf(a.bottom)+(a.outer?' + '+nameOf(a.outer):'')+'（'+a.name+(a.cat?' · '+a.cat:'')+'）'+(a.note?'\n备注：'+a.note:'');
   }else{
     document.getElementById('wTop').innerHTML='<img style="opacity:0">';
     document.getElementById('wBottom').innerHTML='<img style="opacity:0">';
@@ -436,6 +444,8 @@ document.addEventListener('click',function(e){
   if(wear){curActive=wear.dataset.wear;persist();renderLooks();render();toast('今天穿这套 ✔');return;}
   const od=e.target.closest('[data-oldel]');
   if(od){const i=looks.findIndex(l=>l.id==od.dataset.oldel);if(i>=0)looks.splice(i,1);if(curActive==od.dataset.oldel)curActive=null;persist();renderLooks();toast('已删除搭配');return;}
+  const ed=e.target.closest('[data-editl]');
+  if(ed){openCatSheet(ed.dataset.editl);return;}
   const fil=e.target.closest('[data-filter]');
   if(fil){curCat=fil.dataset.filter;renderCatBar();renderLooks();return;}
 });
@@ -495,9 +505,12 @@ document.getElementById('saveFormLook').onclick=doSaveLook;
 let editingLook=null;
 function openCatSheet(lookId){
   editingLook=lookId;
+  const lk=looks.find(l=>l.id===lookId)||{};
+  document.getElementById('l_name').value=lk.name||'';
+  document.getElementById('l_note').value=lk.note||'';
   const cats=lookCats();
   document.getElementById('lookCatChips').innerHTML=(['无分类',...cats]).map((c,i)=>
-    `<span class="chip ${c==='无分类'?'on':''}" data-c="${c}">${c}</span>`).join('');
+    `<span class="chip ${(lk.cat?c===lk.cat:c==='无分类')?'on':''}" data-c="${c}">${c}</span>`).join('');
   document.getElementById('l_newcat').value='';
   openSheet('catSheet');
 }
@@ -509,6 +522,9 @@ document.getElementById('catCancel').onclick=()=>(editingLook=null,closeSheets()
 document.getElementById('catOk').onclick=()=>{
   if(!editingLook)return;
   const lk=looks.find(l=>l.id===editingLook);if(!lk){closeSheets();return;}
+  const nm=document.getElementById('l_name').value.trim();
+  lk.name=nm||lk.name||'未命名搭配';
+  lk.note=document.getElementById('l_note').value.trim();
   let cat=document.getElementById('l_newcat').value.trim();
   if(!cat){
     const on=document.querySelector('#lookCatChips .chip.on');
@@ -516,7 +532,7 @@ document.getElementById('catOk').onclick=()=>{
   }
   lk.cat=cat;
   persist();renderLooks();curCat='全部';editingLook=null;closeSheets();
-  toast(cat?'已归类到「'+cat+'」':'已取消分类');
+  toast('已保存名称与备注'+(cat?' · 归类到「'+cat+'」':''));
 };
 function switchTab(name){
   document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.view===name));
