@@ -284,6 +284,7 @@ const SEED={"items":[
   {"id":"b2","cat":"bottom","color":"藏青","name":"藏青宽松运动裤（唐狮三道杠）","note":"","img":"","pair":""},
   {"id":"b3","cat":"bottom","color":"黑","name":"纯黑抽绳阔腿裤","note":"抽绳/弹力腰","img":"","pair":""},
   {"id":"b4","cat":"bottom","color":"浅蓝","name":"浅蓝抽绳宽松牛仔裤","note":"抽绳","img":"","pair":""},
+  {"id":"b5","cat":"bottom","color":"深蓝","name":"深蓝直筒牛仔裤（水洗·白明线）","note":"直筒/水洗/白明线","img":"b_darkblue_jeans.jpg","pair":""},
   {"id":"o1","cat":"outer","color":"藏青","name":"彪马藏青夹克","note":"白条纹袖","img":"","pair":""},
   {"id":"o2","cat":"outer","color":"黑","name":"彪马黑夹克","note":"白条纹袖","img":"","pair":""},
   {"id":"o3","cat":"outer","color":"藏青","name":"藏青OIOI拉链连帽卫衣","note":"拉链","img":"","pair":""},
@@ -308,7 +309,7 @@ let curActive=store.active||null;  // 今天穿哪套的lookId
 const pairs={};items.forEach(i=>{if(i.pair)pairs[i.id]=i.pair;});
 const DARK=['黑','藏青','条纹','其他','灰','深蓝','咖'];
 const isDk=c=>DARK.includes(c);
-const COLMAP={白:'#efe8db',黑:'#26221c',藏青:'#33405a',灰:'#a7a7a7',米白:'#e8dcc5',卡其:'#c2a878',浅蓝:'#aec3d8',其他:'#bcb3a4'};
+const COLMAP={白:'#efe8db',黑:'#26221c',藏青:'#33405a',灰:'#a7a7a7',米白:'#e8dcc5',卡其:'#c2a878',浅蓝:'#aec3d8',深蓝:'#2b3f63',其他:'#bcb3a4'};
 const COLORS=Object.keys(COLMAP);
 const sel={top:null,bottom:null,outer:null};
 let curCat='全部';
